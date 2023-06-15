@@ -1,2 +1,40 @@
-# nginx_exporter
-nginx exporter for Prometheus
+# <p align="center">nginx_exporter</p>
+
+English | [简体中文](README_zh.md)
+
+### Inspired by <a href="https://github.com/nginxinc/nginx-prometheus-exporter">NGINX Prometheus Exporter</a>,this nginx_exporter is used to collect multiple nginx instance metrics through <a href="https://nginx.org/en/docs/http/ngx_http_stub_status_module.html">ngx_http_stub_status_module</a>.
+
+## GetStarted
+### Config Nginx Stub Status Module
+```sh
+location = /stub_status {
+    stub_status;
+  }
+```
+
+### Use Docker
+```shell
+docker pull zh0uhaiwei/nginx_exporter:latest
+docker run -it --name nginx_exporter -v config.yml:/app/config.yml -p 9113:9113 zh0uhaiwei/nginx_exporter:latest
+```
+
+### Use Shell
+```shell
+cd /opt/nginx_exporter
+#add nginx host in config.yml
+./nginx_exporter
+```
+
+### Browse http://localhost:9113/metrics
+
+### Configure Prometheus
+Add a block to the `scrape_configs` of your prometheus.yml config file:
+```yaml
+scrape_configs:
+- job_name: nginx_exporter
+  static_configs:
+    - targets: ["localhost:9113"]
+```
+
+## License
+This software is free to use under the MIT License [MIT license](/LICENSE).
