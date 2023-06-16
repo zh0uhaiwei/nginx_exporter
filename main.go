@@ -221,14 +221,14 @@ func main() {
 	if err!=nil{
 		log.Fatal(err)
 	}
-	hosts = viper.GetStringSlice("hosts")	
+	hosts = viper.GetStringSlice("hosts")
+	if len(hosts) < 1 {
+		log.Fatal("No nginx host found,check config.yml")
+	}
 	reg := prometheus.NewPedanticRegistry()
 	for _, host := range hosts {
 		log.Println("Found nginx host: ",host)
 		NewNginxHost(host, reg)
-	}
-	if len(hosts) < 1 {
-		log.Fatal("No nginx host found,check config.yml")
 	}
 	reg.MustRegister(
 		collectors.NewProcessCollector(collectors.ProcessCollectorOpts{}),
