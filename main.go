@@ -55,16 +55,16 @@ func (c *NginxHost) GetStubStates() (s StubConnections) {
 	}
 	resp, err := client.Get(apiEndpoint)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return
 	}
 	if resp.StatusCode != http.StatusOK {
-		fmt.Println(err)
+		log.Println(err)
 		return
 	}
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return
 	}
 	resp.Body.Close()
@@ -217,13 +217,18 @@ func NewNginxHost(Host string, reg prometheus.Registerer) *NginxHost {
 
 func main() {
 	viper.SetConfigFile("config.yml")
-	viper.ReadInConfig()
-	hosts = viper.GetStringSlice("host")
+	err :=viper.ReadInConfig()
+	if err!=nil{
+		log.Fatal(err)
+	}
+	hosts = viper.GetStringSlice("host")	
 	reg := prometheus.NewPedanticRegistry()
-
 	for _, host := range hosts {
-		fmt.Println(host)
+		log.Println("Found nginx host:",host)
 		NewNginxHost(host, reg)
+	}
+	if len(hosts) < 1 {
+		log.Fatal("No nginx host found,check config.yml")
 	}
 	reg.MustRegister(
 		collectors.NewProcessCollector(collectors.ProcessCollectorOpts{}),
