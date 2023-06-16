@@ -20,7 +20,11 @@ docker run -it --name nginx_exporter -v config.yml:/app/config.yml -p 9113:9113 
 
 ### Use Shell
 ```shell
+mkdir -p /opt/nginx_exporter
 cd /opt/nginx_exporter
+wget https://github.com/zh0uhaiwei/nginx_exporter/releases/download/v1.0/nginx_exporter-v1.0-linux-x86-64
+mv nginx_exporter-v1.0-linux-x86-64 nginx_exporter
+chmod +x nginx_exporter
 #add nginx host in config.yml
 ./nginx_exporter
 ```
@@ -33,8 +37,11 @@ Add a block to the `scrape_configs` of your prometheus.yml config file:
 scrape_configs:
 - job_name: nginx_exporter
   static_configs:
-    - targets: ["localhost:9113"]
+  - targets: ["localhost:9113"]
 ```
+
+### Configure Grafana
+Upload `grafana/nginx_exporter.json` and view the dashboard.
 
 ## License
 This software is free to use under the MIT License [MIT license](/LICENSE).
