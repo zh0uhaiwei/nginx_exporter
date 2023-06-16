@@ -5,7 +5,7 @@ English | [简体中文](README_zh.md)
 ### Inspired by <a href="https://github.com/nginxinc/nginx-prometheus-exporter">NGINX Prometheus Exporter</a>,this nginx_exporter is used to collect multiple nginx instance metrics through <a href="https://nginx.org/en/docs/http/ngx_http_stub_status_module.html">ngx_http_stub_status_module</a>.
 
 ## GetStarted
-### Config Nginx Stub Status Module
+### Configure Nginx Stub Status Module
 ```sh
 location = /stub_status {
     stub_status;
