@@ -59,7 +59,7 @@ func (c *NginxHost) GetStubStates() (s StubConnections) {
 		return
 	}
 	if resp.StatusCode != http.StatusOK {
-		log.Println(err)
+		log.Printf("Error Respond code %d from %s",resp.StatusCode,apiEndpoint)
 		return
 	}
 	body, err := io.ReadAll(resp.Body)
