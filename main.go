@@ -221,10 +221,10 @@ func main() {
 	if err!=nil{
 		log.Fatal(err)
 	}
-	hosts = viper.GetStringSlice("host")	
+	hosts = viper.GetStringSlice("hosts")	
 	reg := prometheus.NewPedanticRegistry()
 	for _, host := range hosts {
-		log.Println("Found nginx host:",host)
+		log.Println("Found nginx host: ",host)
 		NewNginxHost(host, reg)
 	}
 	if len(hosts) < 1 {
