@@ -19,8 +19,8 @@ docker run -it --name nginx_exporter -v $(pwd)/config.yml:/app/config.yml -p 911
 
 ### 使用Shell
 ```shell
-mkdir -p /opt/nginx_exporter
-cd /opt/nginx_exporter
+mkdir -p nginx_exporter
+cd nginx_exporter
 wget https://github.com/zh0uhaiwei/nginx_exporter/releases/download/v1.0/nginx_exporter-v1.0-linux-x86-64
 mv nginx_exporter-v1.0-linux-x86-64 nginx_exporter
 chmod +x nginx_exporter
