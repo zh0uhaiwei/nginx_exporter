@@ -14,7 +14,7 @@ location = /stub_status {
 ### 使用Docker
 ```shell
 docker pull zh0uhaiwei/nginx_exporter:latest
-docker run -it --name nginx_exporter -v $(pwd)/config.yml:/app/config.yml -p 9113:9113 zh0uhaiwei/nginx_exporter:latest
+docker run --name nginx_exporter -v $(pwd)/config.yml:/app/config.yml -p 9113:9113 zh0uhaiwei/nginx_exporter:latest
 ```
 
 ### 使用Shell
